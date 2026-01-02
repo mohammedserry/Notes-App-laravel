@@ -8,17 +8,16 @@ use App\Models\User;
 
 class PostController extends Controller
 {
-  public function index()
-  {
-    $postsFromDB = Post::all();
+    public function index()
+    {
+        $postsFromDB = Post::all();
+        return view('posts.index', ['posts' => $postsFromDB]);
+    }
 
-    return view('posts.index', ['posts' => $postsFromDB]);
-  }
-
-  public function show(Post $post)
-  {
-    return view('posts.show', ['post' => $post]);
-  }
+    public function show(Post $post)
+    {
+        return view('posts.show', ['post' => $post]);
+    }
 
   public function create()
   {
@@ -36,7 +35,7 @@ class PostController extends Controller
       'post_creator' => ['required', 'exists:users,id']
     ]);
 
-    // 1-get the user data 
+    // 1-get the user data
     $title = request()->title;
     $description = request()->description;
     $postCreator = request()->post_creator;
